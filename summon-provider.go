@@ -28,6 +28,14 @@ func (s *gc) Get(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
+	if key := c.Args().Get(1); key != "" {
+		if val, found := secret.Get(key); found {
+			fmt.Fprintln(Stdout, val)
+			return nil
+		}
+		fmt.Fprintln(Stdout, "Error getting subkey")
+		return nil
+	}
 	fmt.Fprintln(Stdout, secret.Password())
 	return nil
 }
