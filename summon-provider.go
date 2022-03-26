@@ -10,16 +10,14 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-var (
-	// Stdout is exported for tests
-	Stdout io.Writer = os.Stdout
-)
+// Stdout is exported for tests.
+var Stdout io.Writer = os.Stdout
 
 type gc struct {
 	gp gopass.Store
 }
 
-// Get outputs the password for given path on stdout
+// Get outputs the password for given path on stdout.
 func (s *gc) Get(c *cli.Context) error {
 	ctx := ctxutil.WithGlobalFlags(c)
 	ctx = ctxutil.WithNoNetwork(ctx, true)
@@ -28,6 +26,8 @@ func (s *gc) Get(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
+
 	fmt.Fprintln(Stdout, secret.Password())
+
 	return nil
 }

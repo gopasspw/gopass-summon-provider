@@ -10,12 +10,11 @@ import (
 	"github.com/gopasspw/gopass/pkg/gopass/apimock"
 	"github.com/gopasspw/gopass/pkg/termio"
 	"github.com/gopasspw/gopass/tests/gptest"
-
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
-func TestSummonProviderOutputsOnlySecret(t *testing.T) {
+func TestSummonProviderOutputsOnlySecret(t *testing.T) { //nolint:paralleltest
 	ctx := context.Background()
 	act := &gc{
 		gp: apimock.New(),
