@@ -25,7 +25,7 @@ OK := $(shell tput setaf 6; echo ' [OK]'; tput sgr0;)
 
 all: build
 build: $(GOPASS_OUTPUT)
-travis: sysinfo crosscompile build install test codequality
+travis: sysinfo crosscompile build test codequality
 
 sysinfo:
 	@echo ">> SYSTEM INFORMATION"
@@ -94,7 +94,7 @@ crosscompile:
 	@printf '%s\n' '$(OK)'
 
 full:
-	@echo -n ">> COMPILE linux/amd64 xc"
+	@echo -n ">> COMPILE linux/amd64"
 	$(GO) build -o $(GOPASS_OUTPUT)-full
 
 codequality:
@@ -123,4 +123,4 @@ upgrade: gen fmt
 	@$(GO) get -u ./...
 	@$(GO) mod tidy
 
-.PHONY: clean build completion install sysinfo crosscompile test codequality release goreleaser debsign
+.PHONY: clean build completion install sysinfo crosscompile test codequality release
