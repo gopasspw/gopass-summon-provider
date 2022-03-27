@@ -1,4 +1,4 @@
-name: Build gopass-jsonapi
+name: Build gopass
 
 on:
   push:
