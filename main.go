@@ -49,7 +49,7 @@ func main() {
 
 	app := cli.NewApp()
 	app.Name = name
-	app.Version = version
+	app.Version = getVersion().String()
 	app.Usage = `Use "gopass-summon-provider" as provider for "summon"`
 	app.Description = "" +
 		"This command allows to use gopass as a secret provider for summon." +
