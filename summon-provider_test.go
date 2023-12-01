@@ -29,6 +29,6 @@ func TestSummonProviderOutputsOnlySecret(t *testing.T) { //nolint:paralleltest
 		Stdout = os.Stdout
 	}()
 
-	assert.NoError(t, act.Get(gptest.CliCtx(ctx, t, "foo")))
+	require.NoError(t, act.Get(gptest.CliCtx(ctx, t, "foo")))
 	assert.Equal(t, "bar\n", buf.String())
 }
