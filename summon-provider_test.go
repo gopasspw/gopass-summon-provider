@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"context"
 	"os"
 	"testing"
 
@@ -15,7 +14,7 @@ import (
 )
 
 func TestSummonProviderOutputsOnlySecret(t *testing.T) { //nolint:paralleltest
-	ctx := context.Background()
+	ctx := t.Context()
 	act := &gc{
 		gp: apimock.New(),
 	}
