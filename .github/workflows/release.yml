@@ -13,6 +13,7 @@ jobs:
           egress-policy: block
           allowed-endpoints: >
             github.com:443
+            api.github.com:443
             objects.githubusercontent.com:443
             proxy.golang.org:443
             raw.githubusercontent.com:443
