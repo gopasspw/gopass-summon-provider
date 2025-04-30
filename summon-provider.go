@@ -27,7 +27,7 @@ func (s *gc) Get(c *cli.Context) error {
 		return err
 	}
 
-	fmt.Fprintln(Stdout, secret.Password())
+	fmt.Fprint(Stdout, string(secret.Bytes()))
 
 	return nil
 }
