@@ -8,9 +8,9 @@ import (
 	"github.com/fatih/color"
 	"github.com/gopasspw/gopass/pkg/gopass/apimock"
 	"github.com/gopasspw/gopass/pkg/termio"
-	"github.com/gopasspw/gopass/tests/gptest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/urfave/cli/v3"
 )
 
 func TestSummonProviderOutputsOnlySecret(t *testing.T) { //nolint:paralleltest
@@ -28,6 +28,9 @@ func TestSummonProviderOutputsOnlySecret(t *testing.T) { //nolint:paralleltest
 		Stdout = os.Stdout
 	}()
 
-	require.NoError(t, act.Get(gptest.CliCtx(ctx, t, "foo")))
+	app := &cli.Command{
+		Action: act.Get,
+	}
+	require.NoError(t, app.Run(ctx, []string{"app", "foo"}))
 	assert.Equal(t, "bar\n", buf.String())
 }

@@ -1,13 +1,14 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"os"
 
 	"github.com/gopasspw/gopass/pkg/ctxutil"
 	"github.com/gopasspw/gopass/pkg/gopass"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 // Stdout is exported for tests.
@@ -18,10 +19,9 @@ type gc struct {
 }
 
 // Get outputs the password for given path on stdout.
-func (s *gc) Get(c *cli.Context) error {
-	ctx := ctxutil.WithGlobalFlags(c)
+func (s *gc) Get(ctx context.Context, cmd *cli.Command) error {
 	ctx = ctxutil.WithNoNetwork(ctx, true)
-	path := c.Args().Get(0)
+	path := cmd.Args().Get(0)
 	secret, err := s.gp.Get(ctx, path, "latest")
 	if err != nil {
 		return err
