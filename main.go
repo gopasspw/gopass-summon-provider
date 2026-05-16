@@ -8,7 +8,7 @@ import (
 	"os/signal"
 
 	"github.com/gopasspw/gopass/pkg/gopass/api"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 const (
@@ -47,18 +47,19 @@ func main() {
 		gp: gp,
 	}
 
-	app := cli.NewApp()
-	app.Name = name
-	app.Version = getVersion().String()
-	app.Usage = `Use "gopass-summon-provider" as provider for "summon"`
-	app.Description = "" +
-		"This command allows to use gopass as a secret provider for summon." +
-		"To use it set the 'SUMMON_PROVIDER' variable to this executable or" +
-		"copy or link it (as `gopass`) into the summon provider directory" +
-		"'/usr/local/lib/summon/'. See 'summon' documentation for more details."
-	app.Action = gc.Get
+	app := &cli.Command{
+		Name:    name,
+		Version: getVersion().String(),
+		Usage:   `Use "gopass-summon-provider" as provider for "summon"`,
+		Description: "" +
+			"This command allows to use gopass as a secret provider for summon." +
+			"To use it set the 'SUMMON_PROVIDER' variable to this executable or" +
+			"copy or link it (as `gopass`) into the summon provider directory" +
+			"'/usr/local/lib/summon/'. See 'summon' documentation for more details.",
+		Action: gc.Get,
+	}
 
-	if err := app.RunContext(ctx, os.Args); err != nil {
+	if err := app.Run(ctx, os.Args); err != nil {
 		log.Fatal(err)
 	}
 }
